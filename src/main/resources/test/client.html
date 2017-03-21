@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input type="text" id="sendText"><input type="button" value="发送" onclick="send()">
+    <hr>
+    <textarea rows="50" cols="20" id="receviText"></textarea>
+</body>
+</html>
+<script type="text/javascript">
+    var ws = new WebSocket("ws://127.0.0.1:8080/websocket");
+    ws.onmessage = function(msg){
+        document.getElementById("receviText").value = document.getElementById("receviText").value+msg.data+"\r\n";
+    }
+
+    function send(){
+        ws.send(document.getElementById("sendText").value);
+    }
+</script>
